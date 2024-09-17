@@ -1,0 +1,2 @@
+extends roaming_behaviour
+class_name jumping_enemy

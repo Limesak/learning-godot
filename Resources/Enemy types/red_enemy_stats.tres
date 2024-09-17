@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="stats_sheet" load_steps=2 format=3 uid="uid://6qgbotpvm5gx"]
+
+[ext_resource type="Script" path="res://Scripts/stats_sheet.gd" id="1_npl11"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_npl11")
+health = 50
+speed = 80
+attack = 0
