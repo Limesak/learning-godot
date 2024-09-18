@@ -7,6 +7,7 @@ class_name EnemyClass
 
 @export var stat_sheet: stats_sheet
 @export var movement_behaviour: roaming_behaviour
+@export var damage_input: weakness_type
 
 var health: int = 100: set = set_health, get = get_health
 var speed: int : set = set_speed
@@ -25,11 +26,19 @@ func _physics_process(delta):
 		velocity += get_gravity() * delta
 	move_and_slide()
 
+func check_damage(damage_type, amount_of_damage):
+	set_health(damage_input.receive_damage(damage_type, amount_of_damage))
+
 func set_health(new_value: int):
 	health = new_value
+	if (health <= 0):
+		death()
 
 func set_speed(new_value: int):
 	speed = new_value
 
 func get_health():
 	return health
+
+func death():
+	queue_free()

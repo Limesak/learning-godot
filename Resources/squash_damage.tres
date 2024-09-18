@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="squash_damage" load_steps=2 format=3 uid="uid://3kmadlo6j6y6"]
+
+[ext_resource type="Script" path="res://Resources/squash_damage.gd" id="1_06kns"]
+
+[resource]
+script = ExtResource("1_06kns")

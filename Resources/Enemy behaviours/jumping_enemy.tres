@@ -1,6 +1,0 @@
-[gd_resource type="Resource" script_class="jumping_enemy" load_steps=2 format=3 uid="uid://qexrqj8s50so"]
-
-[ext_resource type="Script" path="res://Resources/Enemy behaviours/jumping.gd" id="1_y8vvt"]
-
-[resource]
-script = ExtResource("1_y8vvt")

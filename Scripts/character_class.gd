@@ -42,6 +42,19 @@ func jump_action():
     audio_stream_player.play()
     velocity.y = JUMP_VELOCITY
 
+func check_squash():
+    for index in range(get_slide_collision_count()):
+        var collision = get_slide_collision(index)
+
+        if collision.get_collider() == null:
+            continue
+        
+        if  collision.get_collider().is_in_group("slimes"):
+            var slime = collision.get_collider()
+            if Vector2.UP.dot(collision.get_normal()) > 0.1:
+                slime.check_damage("squash_damage", 0)
+
+
 func death():
     print("you died!")
     audio_stream_player.stream = death_sfx

@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://cw428fico5vni"]
+[gd_scene load_steps=14 format=3 uid="uid://cw428fico5vni"]
 
 [ext_resource type="Script" path="res://Scripts/enemy_class.gd" id="1_8h21d"]
 [ext_resource type="Resource" uid="uid://6qgbotpvm5gx" path="res://Resources/Enemy types/red_enemy_stats.tres" id="1_eunse"]
 [ext_resource type="Texture2D" uid="uid://cr7xj613516xn" path="res://Assets/sprites/slime_purple.png" id="3_buokn"]
 [ext_resource type="Resource" uid="uid://bx6d8o7vav5ef" path="res://Resources/Enemy behaviours/wall_to_wall.tres" id="3_em4e3"]
+[ext_resource type="Resource" uid="uid://3kmadlo6j6y6" path="res://Resources/squash_damage.tres" id="4_iov25"]
 [ext_resource type="PackedScene" uid="uid://bx71bje6vc4av" path="res://Scenes/killzone.tscn" id="4_mjtw8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fhv0v"]
@@ -43,17 +44,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8sq2b"]
-size = Vector2(12, 14)
+size = Vector2(12, 10)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bdcch"]
 radius = 6.0
 
-[node name="RedEnemy" type="CharacterBody2D"]
+[node name="RedEnemy" type="CharacterBody2D" groups=["slimes"]]
 z_index = 3
 collision_layer = 4
 script = ExtResource("1_8h21d")
 stat_sheet = ExtResource("1_eunse")
 movement_behaviour = ExtResource("3_em4e3")
+damage_input = ExtResource("4_iov25")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
@@ -65,7 +67,7 @@ frame_progress = 0.269416
 position = Vector2(0, -12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
-position = Vector2(0, 5)
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_8sq2b")
 
 [node name="RaycastR" type="RayCast2D" parent="."]
@@ -76,6 +78,6 @@ target_position = Vector2(9, 0)
 position = Vector2(0, -6)
 target_position = Vector2(-9, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["slimes"]]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_bdcch")
