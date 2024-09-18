@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://briw3fses054j"]
+[gd_scene load_steps=21 format=3 uid="uid://briw3fses054j"]
 
 [ext_resource type="Resource" uid="uid://b2y4s33l7sbgu" path="res://Resources/Enemy types/green_enemy_stats.tres" id="1_62jgq"]
 [ext_resource type="Texture2D" uid="uid://chmmmkjh647tf" path="res://Assets/sprites/slime_green.png" id="1_w6ou8"]
@@ -11,6 +11,22 @@ script/source = "extends EnemyClass
 
 @onready var game_manager = %GameManager
 "
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eba2h"]
+atlas = ExtResource("1_w6ou8")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffcwb"]
+atlas = ExtResource("1_w6ou8")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4eq3"]
+atlas = ExtResource("1_w6ou8")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rddoa"]
+atlas = ExtResource("1_w6ou8")
+region = Rect2(72, 48, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nf1lf"]
 atlas = ExtResource("1_w6ou8")
@@ -32,6 +48,23 @@ region = Rect2(72, 24, 24, 24)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_eba2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffcwb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4eq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rddoa")
+}],
+"loop": false,
+"name": &"hurting",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_nf1lf")
 }, {
 "duration": 1.0,
@@ -44,15 +77,115 @@ animations = [{
 "texture": SubResource("AtlasTexture_w1h0s")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sq2b"]
-size = Vector2(12, 10)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6xnkj"]
+radius = 5.0
+height = 16.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_v5ydx"]
-radius = 6.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sq2b"]
+size = Vector2(14, 10)
+
+[sub_resource type="Animation" id="Animation_f7cby"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Killzone/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:collision_layer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_4vp8o"]
+resource_name = "squish"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.185, 0.45)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Killzone/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"remove_from_scene"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:collision_layer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2147483648]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gghcc"]
+_data = {
+"RESET": SubResource("Animation_f7cby"),
+"squish": SubResource("Animation_4vp8o")
+}
 
 [node name="GreenEnemy" type="CharacterBody2D" groups=["slimes"]]
 z_index = 3
@@ -65,8 +198,12 @@ damage_input = ExtResource("3_e6dt2")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_p242u")
-autoplay = "default"
-frame_progress = 0.364771
+animation = &"hurting"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["slimes"]]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_6xnkj")
 
 [node name="Killzone" parent="." instance=ExtResource("2_flnma")]
 position = Vector2(0, -12)
@@ -83,6 +220,10 @@ target_position = Vector2(13, 0)
 position = Vector2(0, -6)
 target_position = Vector2(-13, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["slimes"]]
-position = Vector2(0, -6)
-shape = SubResource("CircleShape2D_v5ydx")
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"Sound Effects"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gghcc")
+}

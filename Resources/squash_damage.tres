@@ -1,6 +1,10 @@
-[gd_resource type="Resource" script_class="squash_damage" load_steps=2 format=3 uid="uid://3kmadlo6j6y6"]
+[gd_resource type="Resource" script_class="squash_damage" load_steps=3 format=3 uid="uid://3kmadlo6j6y6"]
 
 [ext_resource type="Script" path="res://Resources/squash_damage.gd" id="1_06kns"]
+[ext_resource type="AudioStream" uid="uid://cum04f1gb4f4b" path="res://Assets/sounds/hurt.wav" id="2_hion3"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_06kns")
+squash_sound = ExtResource("2_hion3")
+bounce_strenght = 150

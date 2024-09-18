@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://c5fvnpcqpiq0k"]
+[gd_scene load_steps=37 format=4 uid="uid://c5fvnpcqpiq0k"]
 
 [ext_resource type="PackedScene" uid="uid://0ylg855n5gjg" path="res://Scenes/player.tscn" id="1_02k1i"]
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_oftvj"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://cw428fico5vni" path="res://Scenes/red_enemy.tscn" id="9_5gc8o"]
 [ext_resource type="Script" path="res://Scripts/stats_sheet.gd" id="9_uodmr"]
 [ext_resource type="Script" path="res://Resources/Enemy behaviours/wall_to_wall.gd" id="10_ojr5b"]
+[ext_resource type="Script" path="res://Resources/squash_damage.gd" id="11_5vujc"]
+[ext_resource type="AudioStream" uid="uid://cum04f1gb4f4b" path="res://Assets/sounds/hurt.wav" id="12_xsoib"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y2upx"]
 texture = ExtResource("2_edv15")
@@ -362,6 +364,12 @@ attack = 0
 resource_local_to_scene = true
 script = ExtResource("10_ojr5b")
 
+[sub_resource type="Resource" id="Resource_7y7ku"]
+resource_local_to_scene = true
+script = ExtResource("11_5vujc")
+squash_sound = ExtResource("12_xsoib")
+bounce_strenght = 150
+
 [sub_resource type="Resource" id="Resource_nnj3i"]
 resource_local_to_scene = true
 script = ExtResource("9_uodmr")
@@ -372,6 +380,12 @@ attack = 0
 [sub_resource type="Resource" id="Resource_6q52o"]
 resource_local_to_scene = true
 script = ExtResource("10_ojr5b")
+
+[sub_resource type="Resource" id="Resource_ib8iw"]
+resource_local_to_scene = true
+script = ExtResource("11_5vujc")
+squash_sound = ExtResource("12_xsoib")
+bounce_strenght = 150
 
 [sub_resource type="Resource" id="Resource_aubn7"]
 resource_local_to_scene = true
@@ -384,6 +398,12 @@ attack = 0
 resource_local_to_scene = true
 script = ExtResource("10_ojr5b")
 
+[sub_resource type="Resource" id="Resource_iif1y"]
+resource_local_to_scene = true
+script = ExtResource("11_5vujc")
+squash_sound = ExtResource("12_xsoib")
+bounce_strenght = 150
+
 [sub_resource type="Resource" id="Resource_peuln"]
 resource_local_to_scene = true
 script = ExtResource("9_uodmr")
@@ -395,6 +415,12 @@ attack = 0
 resource_local_to_scene = true
 script = ExtResource("10_ojr5b")
 
+[sub_resource type="Resource" id="Resource_3o3rs"]
+resource_local_to_scene = true
+script = ExtResource("11_5vujc")
+squash_sound = ExtResource("12_xsoib")
+bounce_strenght = 150
+
 [sub_resource type="Resource" id="Resource_fdu3g"]
 resource_local_to_scene = true
 script = ExtResource("9_uodmr")
@@ -405,6 +431,12 @@ attack = 0
 [sub_resource type="Resource" id="Resource_05skc"]
 resource_local_to_scene = true
 script = ExtResource("10_ojr5b")
+
+[sub_resource type="Resource" id="Resource_d08mn"]
+resource_local_to_scene = true
+script = ExtResource("11_5vujc")
+squash_sound = ExtResource("12_xsoib")
+bounce_strenght = 150
 
 [node name="Game" type="Node2D"]
 
@@ -556,25 +588,30 @@ autoplay = "moving"
 position = Vector2(-120, 96)
 stat_sheet = SubResource("Resource_6deut")
 movement_behaviour = SubResource("Resource_ijee3")
+damage_input = SubResource("Resource_7y7ku")
 
 [node name="RedEnemy" parent="." instance=ExtResource("9_5gc8o")]
 position = Vector2(-8, 96)
 stat_sheet = SubResource("Resource_nnj3i")
 movement_behaviour = SubResource("Resource_6q52o")
+damage_input = SubResource("Resource_ib8iw")
 
 [node name="GreenEnemy2" parent="." instance=ExtResource("6_jngxw")]
 position = Vector2(120, 96)
 stat_sheet = SubResource("Resource_aubn7")
 movement_behaviour = SubResource("Resource_vfltd")
+damage_input = SubResource("Resource_iif1y")
 
 [node name="GreenEnemy3" parent="." instance=ExtResource("6_jngxw")]
 position = Vector2(88, -64)
 stat_sheet = SubResource("Resource_peuln")
 movement_behaviour = SubResource("Resource_eii7x")
+damage_input = SubResource("Resource_3o3rs")
 
 [node name="GreenEnemy4" parent="." instance=ExtResource("6_jngxw")]
 position = Vector2(184, 80)
 stat_sheet = SubResource("Resource_fdu3g")
 movement_behaviour = SubResource("Resource_05skc")
+damage_input = SubResource("Resource_d08mn")
 
 [connection signal="timeout" from="GameManager/Timer" to="GameManager" method="_on_timer_timeout"]
