@@ -8,3 +8,4 @@ resource_local_to_scene = true
 script = ExtResource("1_06kns")
 squash_sound = ExtResource("2_hion3")
 bounce_strenght = 150
+input_damage_tag = "squash_damage"

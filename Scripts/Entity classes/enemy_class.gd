@@ -21,7 +21,7 @@ var can_move = true
 func _ready():
 	set_speed(stat_sheet.speed)
 	animation.add_animation_library("enemy_animations", animation_library)
-	%GameManager.player_entity.attackAttempt.connect(check_damage)
+	%GameManager.player_entity.sendDamage.connect(check_damage)
 
 func _process(delta):
 	if movement_behaviour != null && can_move:

@@ -1,6 +1,8 @@
 extends CharacterClass
 
 func _process(_delta):
+	for attack in player_attacks:
+		attack.define_attack(self)
 	switch_animations()
 
 func _physics_process(delta):

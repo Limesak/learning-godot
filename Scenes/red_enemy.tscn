@@ -1,11 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://cw428fico5vni"]
+[gd_scene load_steps=22 format=3 uid="uid://cw428fico5vni"]
 
 [ext_resource type="Script" path="res://Scripts/Entity classes/enemy_class.gd" id="1_8h21d"]
 [ext_resource type="Resource" uid="uid://6qgbotpvm5gx" path="res://Resources/Enemy types/red_enemy_stats.tres" id="1_eunse"]
 [ext_resource type="Texture2D" uid="uid://cr7xj613516xn" path="res://Assets/sprites/slime_purple.png" id="3_buokn"]
 [ext_resource type="Resource" uid="uid://bx6d8o7vav5ef" path="res://Resources/Enemy behaviours/wall_to_wall.tres" id="3_em4e3"]
 [ext_resource type="PackedScene" uid="uid://bx71bje6vc4av" path="res://Scenes/killzone.tscn" id="4_mjtw8"]
+[ext_resource type="Script" path="res://Scripts/Resource templates/weakness_type.gd" id="4_sstxg"]
 [ext_resource type="AnimationLibrary" uid="uid://bi5xy0ctdti4k" path="res://Resources/Enemy animations/EnemyAnimations_library.res" id="5_0raa6"]
+[ext_resource type="Resource" uid="uid://3kmadlo6j6y6" path="res://Resources/Enemy weaknesses/squash_damage.tres" id="5_meswn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fhv0v"]
 atlas = ExtResource("3_buokn")
@@ -133,6 +135,7 @@ collision_layer = 4
 script = ExtResource("1_8h21d")
 stat_sheet = ExtResource("1_eunse")
 movement_behaviour = ExtResource("3_em4e3")
+weaknesses = Array[ExtResource("4_sstxg")]([ExtResource("5_meswn")])
 animation_library = ExtResource("5_0raa6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -141,7 +144,7 @@ sprite_frames = SubResource("SpriteFrames_p242u")
 animation = &"hurting"
 autoplay = "default"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemies"]]
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_t5dam")
 

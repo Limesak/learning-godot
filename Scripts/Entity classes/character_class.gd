@@ -17,11 +17,11 @@ var footsteps_frames : Array = [1,5,9,11,15]
 
 var direction
 
+signal sendDamage
+
 func _ready():
-	# for attack in player_attacks:
-	# 	if not attack.attackAttempt.is_connected():
-	# 		attack.connect()
-	pass
+	for attack in player_attacks:
+		attack.attackAttempt.connect(send_damage)
 
 func apply_movements():
 	# Flip sprite
@@ -34,6 +34,9 @@ func apply_movements():
 		velocity.x = direction * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
+
+func send_damage(dmg, tag, enemy):
+	sendDamage.emit(dmg, tag, self, enemy)
 
 func switch_animations():
 	if is_on_floor():
@@ -55,7 +58,6 @@ func bounce(strength):
 		return
 	else:
 		bounced = true
-		print("bounce attempt")
 		velocity.y = -strength
 
 func death():

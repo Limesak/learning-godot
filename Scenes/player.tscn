@@ -1,10 +1,12 @@
-[gd_scene load_steps=29 format=3 uid="uid://0ylg855n5gjg"]
+[gd_scene load_steps=31 format=3 uid="uid://0ylg855n5gjg"]
 
 [ext_resource type="Texture2D" uid="uid://bot5xiq7505b2" path="res://Assets/sprites/knight.png" id="1_4yr70"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_lbnlm"]
 [ext_resource type="AudioStream" uid="uid://ddn3g00nu0632" path="res://Assets/sounds/jump.wav" id="3_mnqkf"]
 [ext_resource type="AudioStream" uid="uid://cum04f1gb4f4b" path="res://Assets/sounds/hurt.wav" id="3_wj2p4"]
+[ext_resource type="Script" path="res://Scripts/Resource templates/player_attacks.gd" id="5_7ma0v"]
 [ext_resource type="AudioStream" uid="uid://b4asnvxsookde" path="res://Assets/sounds/tap.wav" id="5_vpeuu"]
+[ext_resource type="Resource" uid="uid://bficytvwsp8d8" path="res://Resources/Player attacks/squash_attack.tres" id="6_cxo7b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ukp6u"]
 atlas = ExtResource("1_4yr70")
@@ -182,6 +184,7 @@ script = ExtResource("1_lbnlm")
 footsteps_sfx = ExtResource("5_vpeuu")
 jump_sfx = ExtResource("3_mnqkf")
 death_sfx = ExtResource("3_wj2p4")
+player_attacks = Array[ExtResource("5_7ma0v")]([ExtResource("6_cxo7b")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)

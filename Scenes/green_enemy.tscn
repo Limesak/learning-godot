@@ -1,10 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://briw3fses054j"]
+[gd_scene load_steps=22 format=3 uid="uid://briw3fses054j"]
 
 [ext_resource type="Resource" uid="uid://b2y4s33l7sbgu" path="res://Resources/Enemy types/green_enemy_stats.tres" id="1_62jgq"]
 [ext_resource type="Texture2D" uid="uid://chmmmkjh647tf" path="res://Assets/sprites/slime_green.png" id="1_w6ou8"]
 [ext_resource type="Resource" uid="uid://bx6d8o7vav5ef" path="res://Resources/Enemy behaviours/wall_to_wall.tres" id="2_2vn21"]
 [ext_resource type="PackedScene" uid="uid://bx71bje6vc4av" path="res://Scenes/killzone.tscn" id="2_flnma"]
+[ext_resource type="Script" path="res://Scripts/Resource templates/weakness_type.gd" id="3_xllj0"]
 [ext_resource type="AnimationLibrary" uid="uid://bi5xy0ctdti4k" path="res://Resources/Enemy animations/EnemyAnimations_library.res" id="4_6s3j1"]
+[ext_resource type="Resource" uid="uid://3kmadlo6j6y6" path="res://Resources/Enemy weaknesses/squash_damage.tres" id="4_amgvr"]
 
 [sub_resource type="GDScript" id="GDScript_v8kcw"]
 script/source = "extends EnemyClass
@@ -139,6 +141,7 @@ collision_layer = 4
 script = SubResource("GDScript_v8kcw")
 stat_sheet = ExtResource("1_62jgq")
 movement_behaviour = ExtResource("2_2vn21")
+weaknesses = Array[ExtResource("3_xllj0")]([ExtResource("4_amgvr")])
 animation_library = ExtResource("4_6s3j1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -147,7 +150,7 @@ sprite_frames = SubResource("SpriteFrames_p242u")
 animation = &"hurting"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemies"]]
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_6xnkj")
 
