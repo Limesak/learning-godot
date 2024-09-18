@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="squash_attack" load_steps=2 format=3 uid="uid://bficytvwsp8d8"]
+
+[ext_resource type="Script" path="res://Resources/Player attacks/squash_attack.gd" id="1_veujf"]
+
+[resource]
+script = ExtResource("1_veujf")
+damage = 100
+damage_tag = "squash_damage"

@@ -1,10 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://briw3fses054j"]
+[gd_scene load_steps=20 format=3 uid="uid://briw3fses054j"]
 
 [ext_resource type="Resource" uid="uid://b2y4s33l7sbgu" path="res://Resources/Enemy types/green_enemy_stats.tres" id="1_62jgq"]
 [ext_resource type="Texture2D" uid="uid://chmmmkjh647tf" path="res://Assets/sprites/slime_green.png" id="1_w6ou8"]
 [ext_resource type="Resource" uid="uid://bx6d8o7vav5ef" path="res://Resources/Enemy behaviours/wall_to_wall.tres" id="2_2vn21"]
 [ext_resource type="PackedScene" uid="uid://bx71bje6vc4av" path="res://Scenes/killzone.tscn" id="2_flnma"]
-[ext_resource type="Resource" uid="uid://3kmadlo6j6y6" path="res://Resources/squash_damage.tres" id="3_e6dt2"]
+[ext_resource type="AnimationLibrary" uid="uid://bi5xy0ctdti4k" path="res://Resources/Enemy animations/EnemyAnimations_library.res" id="4_6s3j1"]
 
 [sub_resource type="GDScript" id="GDScript_v8kcw"]
 script/source = "extends EnemyClass
@@ -127,73 +127,19 @@ tracks/2/keys = {
 "values": [4]
 }
 
-[sub_resource type="Animation" id="Animation_4vp8o"]
-resource_name = "squish"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.185, 0.45)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Killzone/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"remove_from_scene"
-}]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:collision_layer")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2147483648]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gghcc"]
 _data = {
-"RESET": SubResource("Animation_f7cby"),
-"squish": SubResource("Animation_4vp8o")
+"RESET": SubResource("Animation_f7cby")
 }
 
-[node name="GreenEnemy" type="CharacterBody2D" groups=["slimes"]]
+[node name="GreenEnemy" type="CharacterBody2D" groups=["Enemies"]]
 z_index = 3
+position = Vector2(-1, 0)
 collision_layer = 4
 script = SubResource("GDScript_v8kcw")
 stat_sheet = ExtResource("1_62jgq")
 movement_behaviour = ExtResource("2_2vn21")
-damage_input = ExtResource("3_e6dt2")
+animation_library = ExtResource("4_6s3j1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
@@ -201,7 +147,7 @@ sprite_frames = SubResource("SpriteFrames_p242u")
 animation = &"hurting"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["slimes"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_6xnkj")
 

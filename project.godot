@@ -21,7 +21,7 @@ Music="*res://Scenes/music.tscn"
 
 [global_group]
 
-slimes=""
+Enemies="Every enemy of the game needs to be in this group."
 
 [input]
 

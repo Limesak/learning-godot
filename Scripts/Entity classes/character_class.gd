@@ -7,6 +7,7 @@ const JUMP_VELOCITY = -300
 @export var footsteps_sfx : AudioStream
 @export var jump_sfx : AudioStream
 @export var death_sfx : AudioStream
+@export var player_attacks : Array[player_attack]
 
 var footsteps_frames : Array = [1,5,9,11,15]
 
@@ -15,6 +16,12 @@ var footsteps_frames : Array = [1,5,9,11,15]
 @onready var audio_stream_player = $AudioStreamPlayer2D
 
 var direction
+
+func _ready():
+	# for attack in player_attacks:
+	# 	if not attack.attackAttempt.is_connected():
+	# 		attack.connect()
+	pass
 
 func apply_movements():
 	# Flip sprite
@@ -41,18 +48,6 @@ func jump_action():
 	audio_stream_player.stream = jump_sfx
 	audio_stream_player.play()
 	velocity.y = JUMP_VELOCITY
-
-func check_squash():
-	for index in range(get_slide_collision_count()):
-		var collision = get_slide_collision(index)
-
-		if collision.get_collider() == null:
-			continue
-		
-		if  collision.get_collider().is_in_group("slimes"):
-			var slime = collision.get_collider()
-			if Vector2.UP.dot(collision.get_normal()) > 0.1:
-				slime.check_damage("squash_damage", 0, self)
 
 func bounce(strength):
 	var bounced = false
